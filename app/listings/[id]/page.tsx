@@ -9,6 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { MessageSquare } from "lucide-react";
 import { ContactSellerButton } from "@/components/listings/contact-seller-button";
+import { ListingGallery } from "@/components/listings/listing-gallery";
 
 const CONDITION_LABELS: Record<string, string> = {
   NM: "Near Mint",
@@ -62,22 +63,11 @@ export default async function ListingDetailPage({
     <div className="max-w-5xl mx-auto px-4 py-8">
       <div className="grid md:grid-cols-[300px_1fr] gap-8">
         <div className="flex flex-col items-center gap-4">
-          <div className="bg-gradient-to-b from-slate-100 to-slate-200 rounded-xl p-4 w-full flex justify-center">
-            {listing.card_image_url ? (
-              <Image
-                src={listing.card_image_url}
-                alt={listing.card_name}
-                width={240}
-                height={336}
-                className="drop-shadow-xl"
-                priority
-              />
-            ) : (
-              <div className="w-[240px] h-[336px] bg-slate-300 rounded flex items-center justify-center text-slate-500">
-                No image
-              </div>
-            )}
-          </div>
+          <ListingGallery
+            photos={(listing.photos as string[]) ?? []}
+            cardImageUrl={listing.card_image_url}
+            cardName={listing.card_name}
+          />
         </div>
 
         <div className="space-y-6">

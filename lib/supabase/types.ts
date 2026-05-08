@@ -99,6 +99,7 @@ export type Database = {
           created_at: string
           description: string | null
           id: string
+          photos: string[]
           price: number
           quantity: number
           rarity: string | null
@@ -119,6 +120,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
+          photos?: string[]
           price: number
           quantity?: number
           rarity?: string | null
@@ -139,6 +141,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
+          photos?: string[]
           price?: number
           quantity?: number
           rarity?: string | null

@@ -10,6 +10,7 @@ export interface CreateListingInput {
   price: number;
   condition: string;
   description?: string;
+  photos?: string[];
 }
 
 export async function createListing(input: CreateListingInput) {
@@ -46,6 +47,7 @@ export async function createListing(input: CreateListingInput) {
       price: input.price,
       condition: input.condition,
       description: input.description ?? null,
+      photos: input.photos ?? [],
     })
     .select("id")
     .single();

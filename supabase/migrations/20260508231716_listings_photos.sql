@@ -1,0 +1,1 @@
+alter table public.listings add column if not exists photos text[] not null default '{}';
