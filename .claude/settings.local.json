@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(C:\\\\Users\\\\moral\\\\.claude\\\\plugins\\\\cache\\\\claude-plugins-official\\\\superpowers\\\\5.1.0\\\\skills\\\\brainstorming\\\\scripts\\\\start-server.sh *)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir=false --import-alias=\"@/*\" --no-git --yes)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir=false --import-alias=\"@/*\" --no-git --yes --name opcg-marketplace)",
+      "Read(//e/ClaudeCosas/**)",
+      "Bash(npx create-next-app@latest opcg-marketplace-temp --typescript --tailwind --eslint --app --src-dir=false --import-alias=\"@/*\" --no-git --yes)",
+      "Bash(Get-ChildItem -Name)",
+      "Bash(rsync *)",
+      "Bash(cp -r \"E:/ClaudeCosas/opcg-marketplace-temp/app\" \"E:/ClaudeCosas/OPCGMarketplaceV2/\")",
+      "Bash(cp -r \"E:/ClaudeCosas/opcg-marketplace-temp/public\" \"E:/ClaudeCosas/OPCGMarketplaceV2/\")",
+      "Bash(cp \"E:/ClaudeCosas/opcg-marketplace-temp/package.json\" \"E:/ClaudeCosas/OPCGMarketplaceV2/\")",
+      "Bash(cp \"E:/ClaudeCosas/opcg-marketplace-temp/package-lock.json\" \"E:/ClaudeCosas/OPCGMarketplaceV2/\")",
+      "Bash(cp \"E:/ClaudeCosas/opcg-marketplace-temp/next.config.ts\" \"E:/ClaudeCosas/OPCGMarketplaceV2/\")",
+      "Bash(npm install *)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git config *)",
+      "Bash(npx playwright *)",
+      "Bash(npx shadcn@latest init --yes)",
+      "Bash(npx shadcn@latest init --library radix --preset nova --yes)",
+      "Bash(npx shadcn@latest init --help)",
+      "Bash(npx shadcn@latest init --base radix --preset nova --yes)",
+      "Bash(npx shadcn@latest add button input label card avatar dropdown-menu skeleton badge separator --yes)",
+      "Bash(npx supabase *)",
+      "Bash(findstr /v \"KEY\")",
+      "Bash(findstr /v \"SECRET\")",
+      "Bash(npm run *)"
+    ]
+  },
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true
+  }
+}
