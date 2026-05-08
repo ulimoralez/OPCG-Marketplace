@@ -74,6 +74,28 @@ export async function deactivateListing(listingId: string) {
 
   if (error) return { error: "Error al desactivar la publicación." };
 
+  revalidatePath("/dashboard");
+  revalidatePath("/");
+  return { success: true };
+}
+
+export async function reactivateListing(listingId: string) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) return { error: "No autorizado." };
+
+  const { error } = await supabase
+    .from("listings")
+    .update({ status: "active" })
+    .eq("id", listingId)
+    .eq("seller_id", user.id);
+
+  if (error) return { error: "Error al reactivar la publicación." };
+
+  revalidatePath("/dashboard");
   revalidatePath("/");
   return { success: true };
 }
