@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import { Plus, MessageSquare } from "lucide-react";
+import { Suspense } from "react";
 import { createClient } from "@/lib/supabase/server";
 import { SearchBar } from "./search-bar";
 import { UserMenu } from "./user-menu";
+import { UnreadBadge } from "@/components/messages/unread-badge";
 import { Button } from "@/components/ui/button";
-import { Suspense } from "react";
 
 export async function Header() {
   const supabase = await createClient();
@@ -13,13 +14,33 @@ export async function Header() {
   } = await supabase.auth.getUser();
 
   let profile = null;
+  let unreadCount = 0;
+
   if (user) {
-    const { data } = await supabase
+    const { data: profileData } = await supabase
       .from("profiles")
       .select("*")
       .eq("id", user.id)
       .single();
-    profile = data;
+    profile = profileData;
+
+    if (profile) {
+      const { data: convs } = await supabase
+        .from("conversations")
+        .select("id")
+        .or(`buyer_id.eq.${user.id},seller_id.eq.${user.id}`);
+
+      if (convs && convs.length > 0) {
+        const convIds = convs.map((c) => c.id);
+        const { count } = await supabase
+          .from("messages")
+          .select("*", { count: "exact", head: true })
+          .is("read_at", null)
+          .neq("sender_id", user.id)
+          .in("conversation_id", convIds);
+        unreadCount = count ?? 0;
+      }
+    }
   }
 
   return (
@@ -41,6 +62,16 @@ export async function Header() {
         <nav className="flex items-center gap-2 shrink-0 ml-auto">
           {user && profile ? (
             <>
+              <Link href="/messages" className="relative">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-primary-foreground hover:bg-white/10"
+                >
+                  <MessageSquare className="h-5 w-5" />
+                </Button>
+                <UnreadBadge userId={user.id} initialCount={unreadCount} />
+              </Link>
               <Button
                 asChild
                 size="sm"
@@ -55,7 +86,12 @@ export async function Header() {
             </>
           ) : (
             <>
-              <Button asChild variant="ghost" size="sm" className="text-primary-foreground hover:bg-white/10">
+              <Button
+                asChild
+                variant="ghost"
+                size="sm"
+                className="text-primary-foreground hover:bg-white/10"
+              >
                 <Link href="/login">Sign in</Link>
               </Button>
               <Button

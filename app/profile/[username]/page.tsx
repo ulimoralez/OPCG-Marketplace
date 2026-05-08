@@ -5,6 +5,7 @@ import { ProfileHeader } from "@/components/profile/profile-header";
 import { StarRating } from "@/components/profile/star-rating";
 import { ListingCard } from "@/components/listings/listing-card";
 import { ListingGrid } from "@/components/listings/listing-grid";
+import { WriteReviewForm } from "@/components/reviews/write-review-form";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -24,20 +25,35 @@ export default async function ProfilePage({
 
   if (!profile) notFound();
 
-  const [{ data: listings }, { data: reviews }] = await Promise.all([
-    supabase
-      .from("listings")
-      .select("id, card_name, card_image_url, set_code, color, price, condition")
-      .eq("seller_id", profile.id)
-      .eq("status", "active")
-      .order("created_at", { ascending: false }),
+  const [{ data: listings }, { data: reviews }, { data: { user: currentUser } }] =
+    await Promise.all([
+      supabase
+        .from("listings")
+        .select("id, card_name, card_image_url, set_code, color, price, condition")
+        .eq("seller_id", profile.id)
+        .eq("status", "active")
+        .order("created_at", { ascending: false }),
 
-    supabase
+      supabase
+        .from("reviews")
+        .select(`id, rating, comment, created_at, profiles!reviewer_id ( username, avatar_url )`)
+        .eq("seller_id", profile.id)
+        .order("created_at", { ascending: false }),
+
+      supabase.auth.getUser(),
+    ]);
+
+  const isOwnProfile = currentUser?.id === profile.id;
+
+  let hasAlreadyReviewed = false;
+  if (currentUser && !isOwnProfile) {
+    const { count } = await supabase
       .from("reviews")
-      .select(`id, rating, comment, created_at, profiles!reviewer_id ( username, avatar_url )`)
-      .eq("seller_id", profile.id)
-      .order("created_at", { ascending: false }),
-  ]);
+      .select("id", { count: "exact", head: true })
+      .eq("reviewer_id", currentUser.id)
+      .eq("seller_id", profile.id);
+    hasAlreadyReviewed = (count ?? 0) > 0;
+  }
 
   const averageRating =
     reviews && reviews.length > 0
@@ -140,6 +156,13 @@ export default async function ProfilePage({
               );
             })}
           </div>
+        )}
+
+        {currentUser && !isOwnProfile && !hasAlreadyReviewed && (
+          <WriteReviewForm
+            sellerId={profile.id}
+            sellerUsername={profile.username}
+          />
         )}
       </section>
     </div>
