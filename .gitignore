@@ -1,0 +1,35 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Testing
+coverage
+/playwright-report
+/test-results
+
+# Next.js
+.next/
+out/
+build
+
+# Misc
+.DS_Store
+*.pem
+.vercel
+
+# Local env
+.env.local
+.env.*.local
+.env
+
+# Supabase
+supabase/.branches
+supabase/.temp
+
+# Visual companion
+.superpowers/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
