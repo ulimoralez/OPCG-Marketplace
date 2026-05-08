@@ -7,6 +7,8 @@ export type Json =
   | Json[]
 
 export type Database = {
+  // Allows to automatically instantiate createClient with right options
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "14.5"
   }
@@ -91,6 +93,8 @@ export type Database = {
           card_id: string
           card_image_url: string | null
           card_name: string
+          card_type: string | null
+          color: string[]
           condition: string
           created_at: string
           description: string | null
@@ -109,6 +113,8 @@ export type Database = {
           card_id: string
           card_image_url?: string | null
           card_name: string
+          card_type?: string | null
+          color?: string[]
           condition: string
           created_at?: string
           description?: string | null
@@ -127,6 +133,8 @@ export type Database = {
           card_id?: string
           card_image_url?: string | null
           card_name?: string
+          card_type?: string | null
+          color?: string[]
           condition?: string
           created_at?: string
           description?: string | null
@@ -287,6 +295,7 @@ export type Database = {
 }
 
 type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
+
 type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
 
 export type Tables<
@@ -401,3 +410,12 @@ export type CompositeTypes<
   : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
     ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never
+
+export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
+  public: {
+    Enums: {},
+  },
+} as const
