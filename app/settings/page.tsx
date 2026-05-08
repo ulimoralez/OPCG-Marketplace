@@ -30,7 +30,6 @@ export default async function SettingsPage() {
           userId={user.id}
           username={profile.username}
           currentAvatarUrl={profile.avatar_url}
-          onUpload={() => {}}
         />
       </section>
 

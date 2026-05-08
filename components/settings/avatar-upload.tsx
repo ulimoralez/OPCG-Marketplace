@@ -10,7 +10,7 @@ interface AvatarUploadProps {
   userId: string;
   username: string;
   currentAvatarUrl: string | null;
-  onUpload: (newUrl: string) => void;
+  onUpload?: (newUrl: string) => void;
 }
 
 const MAX_SIZE = 2 * 1024 * 1024;
@@ -70,7 +70,7 @@ export function AvatarUpload({
         .update({ avatar_url: publicUrl })
         .eq("id", userId);
 
-      onUpload(publicUrl);
+      onUpload?.(publicUrl);
     } finally {
       setIsUploading(false);
       URL.revokeObjectURL(objectUrl);
