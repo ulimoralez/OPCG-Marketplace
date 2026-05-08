@@ -65,7 +65,8 @@
       "Bash(curl -s \"https://onepiece-card-api.onrender.com/cards/OP01-001\")",
       "Bash(curl -s -H \"Origin: https://opbindr.com\" -H \"Referer: https://opbindr.com/\" \"https://optcg-api.arjunbansal-ai.workers.dev/cards/OP01-001\")",
       "Bash(curl *)",
-      "Bash(npx shadcn@latest add textarea select --yes)"
+      "Bash(npx shadcn@latest add textarea select --yes)",
+      "Bash(npx shadcn@latest add switch --yes)"
     ]
   },
   "enabledPlugins": {
