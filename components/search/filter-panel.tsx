@@ -8,9 +8,34 @@ import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 
 const EXPANSIONS = [
-  "OP01", "OP02", "OP03", "OP04", "OP05",
-  "OP06", "OP07", "OP08", "OP09",
-  "ST01", "ST02", "ST03", "ST04", "ST05",
+  { code: "OP01", name: "Romance Dawn" },
+  { code: "OP02", name: "Paramount War" },
+  { code: "OP03", name: "Pillars of Strength" },
+  { code: "OP04", name: "Kingdoms of Intrigue" },
+  { code: "OP05", name: "Awakening of the New Era" },
+  { code: "OP06", name: "Wings of the Captain" },
+  { code: "OP07", name: "500 Years in the Future" },
+  { code: "OP08", name: "Two Legends" },
+  { code: "OP09", name: "Emperors in the New World" },
+  { code: "OP10", name: "Royal Blood" },
+  { code: "OP11", name: "A Fist of Divine Speed" },
+  { code: "OP12", name: "Legacy of the Master" },
+  { code: "EB01", name: "Memorial Collection" },
+  { code: "EB02", name: "Anime 25th Collection" },
+  { code: "ST01", name: "Straw Hat Crew" },
+  { code: "ST02", name: "Worst Generation" },
+  { code: "ST03", name: "Seven Warlords" },
+  { code: "ST04", name: "Animal Kingdom Pirates" },
+  { code: "ST05", name: "Film Edition" },
+  { code: "ST06", name: "Absolute Justice" },
+  { code: "ST07", name: "Big Mom Pirates" },
+  { code: "ST08", name: "Monkey D. Luffy" },
+  { code: "ST09", name: "Yamato" },
+  { code: "ST10", name: "The Three Captains" },
+  { code: "ST11", name: "Uta" },
+  { code: "ST12", name: "Zoro & Sanji" },
+  { code: "ST13", name: "The Three Brothers" },
+  { code: "ST14", name: "3D2Y" },
 ];
 
 const COLORS = ["Red", "Blue", "Green", "Purple", "Black", "Yellow"];
@@ -84,17 +109,18 @@ export function FilterPanel() {
         <div className="flex flex-wrap gap-1.5">
           {EXPANSIONS.map((exp) => (
             <button
-              key={exp}
+              key={exp.code}
               onClick={() =>
-                updateParam("set", selectedSet === exp ? null : exp)
+                updateParam("set", selectedSet === exp.code ? null : exp.code)
               }
+              title={exp.name}
               className={`px-2 py-0.5 text-xs font-mono rounded border transition-colors ${
-                selectedSet === exp
+                selectedSet === exp.code
                   ? "bg-primary text-primary-foreground border-primary"
                   : "bg-background border-border hover:bg-muted"
               }`}
             >
-              {exp}
+              {exp.code}
             </button>
           ))}
         </div>

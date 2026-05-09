@@ -21,15 +21,15 @@ test.describe("OPTCG API proxy", () => {
 test.describe("Listing detail", () => {
   test("shows 404 page for non-existent listing", async ({ page }) => {
     await page.goto("/listings/00000000-0000-0000-0000-000000000000");
-    await expect(page.getByText(/not found|no encontrada/i)).toBeVisible();
+    await expect(page.getByText(/could not be found|not found/i)).toBeVisible();
   });
 });
 
 test.describe("Homepage", () => {
   test("loads homepage with expansion grid", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByText("Marketplace de One Piece TCG")).toBeVisible();
+    await expect(page.getByText("One Piece TCG")).toBeVisible();
     await expect(page.getByText("OP01")).toBeVisible();
-    await expect(page.getByText("OP09")).toBeVisible();
+    await expect(page.getByText("OP12")).toBeVisible();
   });
 });
