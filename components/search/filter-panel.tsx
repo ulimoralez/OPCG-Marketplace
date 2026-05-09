@@ -25,6 +25,8 @@ const EXPANSIONS = [
   { code: "OP15", name: "Adventure on Kami's Island" },
   { code: "EB01", name: "Memorial Collection" },
   { code: "EB02", name: "Anime 25th Collection" },
+  { code: "EB03", name: "Heroines Edition" },
+  { code: "EB04", name: "Egghead Crisis" },
   { code: "ST01", name: "Straw Hat Crew" },
   { code: "ST02", name: "Worst Generation" },
   { code: "ST03", name: "Seven Warlords" },

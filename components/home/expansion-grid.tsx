@@ -29,6 +29,8 @@ const CATEGORIES = [
     sets: [
       { code: "EB01", name: "Memorial Collection" },
       { code: "EB02", name: "Anime 25th Collection" },
+      { code: "EB03", name: "Heroines Edition" },
+      { code: "EB04", name: "Egghead Crisis" },
     ],
   },
   {
