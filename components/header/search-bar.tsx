@@ -27,7 +27,7 @@ export function SearchBar() {
           ref={inputRef}
           defaultValue={searchParams.get("q") ?? ""}
           placeholder="Buscar cartas..."
-          className="w-full rounded-md border border-input bg-background pl-9 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+          className="w-full rounded-md border border-input bg-background pl-9 pr-4 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
         />
       </div>
     </form>
