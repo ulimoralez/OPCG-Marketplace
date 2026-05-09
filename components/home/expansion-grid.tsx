@@ -19,6 +19,9 @@ const CATEGORIES = [
       { code: "OP10", name: "Royal Blood" },
       { code: "OP11", name: "A Fist of Divine Speed" },
       { code: "OP12", name: "Legacy of the Master" },
+      { code: "OP13", name: "Carrying on His Will" },
+      { code: "OP14", name: "The Azure Sea's Seven" },
+      { code: "OP15", name: "Adventure on Kami's Island" },
     ],
   },
   {
