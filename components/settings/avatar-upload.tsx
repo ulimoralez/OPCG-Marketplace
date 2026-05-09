@@ -13,7 +13,7 @@ interface AvatarUploadProps {
   onUpload?: (newUrl: string) => void;
 }
 
-const MAX_SIZE = 2 * 1024 * 1024;
+const MAX_SIZE = 4 * 1024 * 1024;
 const ACCEPTED = ["image/jpeg", "image/png", "image/webp"];
 
 export function AvatarUpload({
@@ -40,7 +40,7 @@ export function AvatarUpload({
     }
 
     if (file.size > MAX_SIZE) {
-      setError("La imagen no puede superar los 2 MB.");
+      setError("La imagen no puede superar los 4 MB.");
       return;
     }
 
@@ -115,7 +115,7 @@ export function AvatarUpload({
           className="hidden"
         />
         {error && <p className="text-xs text-destructive">{error}</p>}
-        <p className="text-xs text-muted-foreground">JPG, PNG o WebP. Máx 2 MB.</p>
+        <p className="text-xs text-muted-foreground">JPG, PNG o WebP. Máx 4 MB.</p>
       </div>
     </div>
   );
